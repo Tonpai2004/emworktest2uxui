@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temple By Region</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        #temple {
+            background-image: url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 40px 20px;
+        }
+
+        .templeall {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* เพิ่มการตั้งค่าให้ข้อความบนหัว */
+        .header {
+            text-align: center;
+            color: rgb(26, 26, 26);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .header p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .wat {
+            min-width: 300px;
+            margin: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative; /* ใช้ตำแหน่งเพื่อใส่ข้อความ */
+        }
+
+        .wat img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        /* เพิ่มข้อความที่อยู่กลางรูปภาพ */
+        .wat .caption {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .dots {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dots span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin: 0 8px;
+            background-color: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dots .active {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="temple">
+        <div class="templeall">
+            <!-- ข้อความหัวเรื่อง -->
+            <div class="header">
+                <h1>Temple By Region</h1>
+                <p>ค้นหาข้อมูลวัดตามภูมิภาค</p>
+            </div>
+
+            <div class="slider" id="slider">
+                <div class="wat">
+                    <img id="imagewatthai" class="imagewatthai2" src="วัดภาคเหนือ.jpg" alt="ภาคเหนือ">
+                    <div class="caption">วัดภาคเหนือ</div>
+                </div>
+                <div class="wat">
+                    <img id="imagewatthai" class="imagewatthai2" src="วัดภาคกลาง.jpg" alt="ภาคกลาง">
+                    <div class="caption">วัดภาคกลาง</div>
+                </div>
+                <div class="wat">
+                    <img id="imagewatthai" class="imagewatthai2" src="วัดภาคตะวันออก.jpg" alt="ภาคตะวันออกเฉียงเหนือ">
+                    <div class="caption">วัดภาคตะวันออกเฉียงเหนือ</div>
+                </div>
+                <div class="wat">
+                    <img id="imagewatthai" class="imagewatthai2" src="วัดภาคตะวันตก.jpg" alt="ภาคตะวันตก">
+                    <div class="caption">วัดภาคตะวันตก</div>
+                </div>
+                <div class="wat">
+                    <img id="imagewatthai" class="imagewatthai2" src="วัดภาคใต้.jpg" alt="ภาคใต้">
+                    <div class="caption">วัดภาคใต้</div>
+                </div>
+            </div>
+
+            <div class="dots" id="dots">
+                <span class="dot active" onclick="goToSlide(0)"></span>
+                <span class="dot" onclick="goToSlide(1)"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const slider = document.getElementById('slider');
+        const dots = document.querySelectorAll('.dot');
+        const totalItems = slider.children.length;
+        const itemsPerGroup = Math.ceil(totalItems / 2); // Split into two groups
+        let currentIndex = 0;
+
+        function goToSlide(index) {
+            currentIndex = index;
+            slider.style.transform = `translateX(-${currentIndex * itemsPerGroup * 300}px)`;
+            updateDots();
+        }
+
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+    </script>
+</body>
+</html>
